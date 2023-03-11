@@ -1,0 +1,10 @@
+C:\Users\Professional\Desktop\учеба\технологическая практика\MatrixProperties\MatrixProperties\bin\Debug\MatrixProperties.exe.config
+C:\Users\Professional\Desktop\учеба\технологическая практика\MatrixProperties\MatrixProperties\bin\Debug\MatrixProperties.exe
+C:\Users\Professional\Desktop\учеба\технологическая практика\MatrixProperties\MatrixProperties\bin\Debug\MatrixProperties.pdb
+C:\Users\Professional\Desktop\учеба\технологическая практика\MatrixProperties\MatrixProperties\obj\Debug\MatrixProperties.csproj.AssemblyReference.cache
+C:\Users\Professional\Desktop\учеба\технологическая практика\MatrixProperties\MatrixProperties\obj\Debug\MatrixProperties.Form1.resources
+C:\Users\Professional\Desktop\учеба\технологическая практика\MatrixProperties\MatrixProperties\obj\Debug\MatrixProperties.Properties.Resources.resources
+C:\Users\Professional\Desktop\учеба\технологическая практика\MatrixProperties\MatrixProperties\obj\Debug\MatrixProperties.csproj.GenerateResource.cache
+C:\Users\Professional\Desktop\учеба\технологическая практика\MatrixProperties\MatrixProperties\obj\Debug\MatrixProperties.csproj.CoreCompileInputs.cache
+C:\Users\Professional\Desktop\учеба\технологическая практика\MatrixProperties\MatrixProperties\obj\Debug\MatrixProperties.exe
+C:\Users\Professional\Desktop\учеба\технологическая практика\MatrixProperties\MatrixProperties\obj\Debug\MatrixProperties.pdb
