@@ -8,3 +8,13 @@ C:\Users\Professional\Desktop\учеба\технологическая прак
 C:\Users\Professional\Desktop\учеба\технологическая практика\MatrixProperties\MatrixProperties\obj\Debug\MatrixProperties.csproj.CoreCompileInputs.cache
 C:\Users\Professional\Desktop\учеба\технологическая практика\MatrixProperties\MatrixProperties\obj\Debug\MatrixProperties.exe
 C:\Users\Professional\Desktop\учеба\технологическая практика\MatrixProperties\MatrixProperties\obj\Debug\MatrixProperties.pdb
+C:\Users\dns\Desktop\учеба\Inverse-and-pseudo-inverse-matrices\MatrixProperties\obj\Debug\MatrixProperties.csprojAssemblyReference.cache
+C:\Users\dns\Desktop\учеба\Inverse-and-pseudo-inverse-matrices\MatrixProperties\obj\Debug\MatrixProperties.Form1.resources
+C:\Users\dns\Desktop\учеба\Inverse-and-pseudo-inverse-matrices\MatrixProperties\obj\Debug\MatrixProperties.Properties.Resources.resources
+C:\Users\dns\Desktop\учеба\Inverse-and-pseudo-inverse-matrices\MatrixProperties\obj\Debug\MatrixProperties.csproj.GenerateResource.cache
+C:\Users\dns\Desktop\учеба\Inverse-and-pseudo-inverse-matrices\MatrixProperties\obj\Debug\MatrixProperties.csproj.CoreCompileInputs.cache
+C:\Users\dns\Desktop\учеба\Inverse-and-pseudo-inverse-matrices\MatrixProperties\obj\Debug\MatrixProperties.exe
+C:\Users\dns\Desktop\учеба\Inverse-and-pseudo-inverse-matrices\MatrixProperties\obj\Debug\MatrixProperties.pdb
+C:\Users\dns\Desktop\учеба\Inverse-and-pseudo-inverse-matrices\MatrixProperties\bin\Debug\MatrixProperties.exe.config
+C:\Users\dns\Desktop\учеба\Inverse-and-pseudo-inverse-matrices\MatrixProperties\bin\Debug\MatrixProperties.exe
+C:\Users\dns\Desktop\учеба\Inverse-and-pseudo-inverse-matrices\MatrixProperties\bin\Debug\MatrixProperties.pdb

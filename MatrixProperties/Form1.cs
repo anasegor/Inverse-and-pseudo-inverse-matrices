@@ -19,6 +19,7 @@ namespace MatrixProperties
         private void Form1_Load(object sender, EventArgs e)
         {
             for_M.Text = "3";
+            consondeb();
         }
         public Form1()
         {
@@ -30,25 +31,26 @@ namespace MatrixProperties
 
         private void button1_Click(object sender, EventArgs e)//построение обратной матрицы
         {
+            
             M = Convert.ToInt32(for_M.Text);
             A1 = new double[M,M];
-            double det=0;//определитель матрицы
-            while(det==0)
-            {
                 Random rnd = new Random();
                 for(int i=0;i<M;i++)
                 {
                     for (int j = 0; j < M; j++)
                     {
-                        A1[i,j] = (rnd.NextDouble() - 1);
+                        A1[i,j] = rnd.NextDouble() ;
                     }
                 }
-                det=Determ(A1); 
-            }
+            Console.WriteLine("Обратная матрица:");
             for (int row = 0; row < A1.GetLength(0); row++)
             {
                 for (int column = 0; column < A1.GetLength(1); column++)
-                    Console.Write(A1[row, column] + "\t");
+                {
+                    string s = float.Parse(A1[row, column].ToString()).ToString("F4");
+                    Console.Write(s.Remove(s.Length - 2) + "\t");
+                    //Console.Write(A1[row, column] + "\t");
+                }
                 Console.WriteLine();
             }
 
@@ -83,205 +85,230 @@ namespace MatrixProperties
         {
 
         }
-        //для вычисления определителя
-        public static double[,] GetMinor(double[,] matrix, int row, int column)
+        public void consondeb()
         {
-            if (matrix.GetLength(0) != matrix.GetLength(1)) throw new Exception(" Число строк в матрице не совпадает с числом столбцов");
-            double[,] buf = new double[matrix.GetLength(0) - 1, matrix.GetLength(0) - 1];
-            for (int i = 0; i < matrix.GetLength(0); i++)
-                for (int j = 0; j < matrix.GetLength(1); j++)
-                {
-                    if ((i != row) || (j != column))
-                    {
-                        if (i > row && j < column) buf[i - 1, j] = matrix[i, j];
-                        if (i < row && j > column) buf[i, j - 1] = matrix[i, j];
-                        if (i > row && j > column) buf[i - 1, j - 1] = matrix[i, j];
-                        if (i < row && j < column) buf[i, j] = matrix[i, j];
-                    }
-                }
-            return buf;
-        }
-        public static double Determ(double[,] matrix)
-        {
-            if (matrix.GetLength(0) != matrix.GetLength(1)) throw new Exception(" Число строк в матрице не совпадает с числом столбцов");
-            double det = 0;
-            int Rank = matrix.GetLength(0);
-            if (Rank == 1) det = matrix[0, 0];
-            if (Rank == 2) det = matrix[0, 0] * matrix[1, 1] - matrix[0, 1] * matrix[1, 0];
-            if (Rank > 2)
+            if (NativeMethods.AllocConsole())
             {
-                for (int j = 0; j < matrix.GetLength(1); j++)
-                {
-                    det += Math.Pow(-1, 0 + j) * matrix[0, j] * Determ(GetMinor(matrix, 0, j));
-                }
+                IntPtr stdHandle = NativeMethods.GetStdHandle(NativeMethods.STD_OUTPUT_HANDLE);
+                Console.WriteLine("Привет !\r\n");
             }
-            return det;
+            else
+            {
+                Console.WriteLine("Консоль Активна!");
+            }
+
         }
+        public partial class NativeMethods
+        {
+            public static Int32 STD_OUTPUT_HANDLE = -11;
+
+            [System.Runtime.InteropServices.DllImportAttribute("kernel32.dll", EntryPoint = "GetStdHandle")]
+            public static extern System.IntPtr GetStdHandle(Int32 nStdHandle);
+
+            [System.Runtime.InteropServices.DllImportAttribute("kernel32.dll", EntryPoint = "AllocConsole")]
+            [return: System.Runtime.InteropServices.MarshalAsAttribute(System.Runtime.InteropServices.UnmanagedType.Bool)]
+            public static extern bool AllocConsole();
+        }
+
+        //для вычисления определителя
+        //    public static double[,] GetMinor(double[,] matrix, int row, int column)
+        //    {
+        //        if (matrix.GetLength(0) != matrix.GetLength(1)) throw new Exception(" Число строк в матрице не совпадает с числом столбцов");
+        //        double[,] buf = new double[matrix.GetLength(0) - 1, matrix.GetLength(0) - 1];
+        //        for (int i = 0; i < matrix.GetLength(0); i++)
+        //            for (int j = 0; j < matrix.GetLength(1); j++)
+        //            {
+        //                if ((i != row) || (j != column))
+        //                {
+        //                    if (i > row && j < column) buf[i - 1, j] = matrix[i, j];
+        //                    if (i < row && j > column) buf[i, j - 1] = matrix[i, j];
+        //                    if (i > row && j > column) buf[i - 1, j - 1] = matrix[i, j];
+        //                    if (i < row && j < column) buf[i, j] = matrix[i, j];
+        //                }
+        //            }
+        //        return buf;
+        //    }
+        //    public static double Determ(double[,] matrix)
+        //    {
+        //        if (matrix.GetLength(0) != matrix.GetLength(1)) throw new Exception(" Число строк в матрице не совпадает с числом столбцов");
+        //        double det = 0;
+        //        int Rank = matrix.GetLength(0);
+        //        if (Rank == 1) det = matrix[0, 0];
+        //        if (Rank == 2) det = matrix[0, 0] * matrix[1, 1] - matrix[0, 1] * matrix[1, 0];
+        //        if (Rank > 2)
+        //        {
+        //            for (int j = 0; j < matrix.GetLength(1); j++)
+        //            {
+        //                det += Math.Pow(-1, 0 + j) * matrix[0, j] * Determ(GetMinor(matrix, 0, j));
+        //            }
+        //        }
+        //        return det;
+        //    }
+        //}
+
+        //class Matrix
+        //{
+        //    // Скрытые поля
+        //    private int n;
+        //    private int[,] mass;
+
+        //    // Создаем конструкторы матрицы
+        //    public Matrix() { }
+        //    public int N
+        //    {
+        //        get { return n; }
+        //        set { if (value > 0) n = value; }
+        //    }
+
+        //    // Задаем аксессоры для работы с полями вне класса Matrix
+        //    public Matrix(int n)
+        //    {
+        //        this.n = n;
+        //        mass = new int[this.n, this.n];
+        //    }
+        //    public int this[int i, int j]
+        //    {
+        //        get
+        //        {
+        //            return mass[i, j];
+        //        }
+        //        set
+        //        {
+        //            mass[i, j] = value;
+        //        }
+        //    }
+
+        //    // Ввод матрицы с клавиатуры
+        //    public void WriteMat()
+        //    {
+        //        for (int i = 0; i < n; i++)
+        //        {
+        //            for (int j = 0; j < n; j++)
+        //            {
+        //                Console.WriteLine("Введите элемент матрицы {0}:{1}", i + 1, j + 1);
+        //                mass[i, j] = Convert.ToInt32(Console.ReadLine());
+        //            }
+        //        }
+        //    }
+
+        //    // Вывод матрицы с клавиатуры
+        //    public void ReadMat()
+        //    {
+        //        for (int i = 0; i < n; i++)
+        //        {
+        //            for (int j = 0; j < n; j++)
+        //            {
+        //                Console.Write(mass[i, j] + "\t");
+        //            }
+        //            Console.WriteLine();
+        //        }
+        //    }
+
+
+        //    // Проверка матрицы А на единичность
+        //    public void oneMat(Matrix a)
+        //    {
+        //        int count = 0;
+        //        for (int i = 0; i < n; i++)
+        //        {
+        //            for (int j = 0; j < n; j++)
+        //            {
+        //                if (a[i, j] == 1 && i == j)
+        //                {
+        //                    count++;
+        //                }
+        //            }
+
+        //        }
+        //        if (count == a.N)
+        //        {
+        //            Console.WriteLine("Единичная");
+        //        }
+        //        else Console.WriteLine("Не единичная");
+        //    }
+
+
+        //    // Умножение матрицы А на число
+        //    public static Matrix umnch(Matrix a, int ch)
+        //    {
+        //        Matrix resMass = new Matrix(a.N);
+        //        for (int i = 0; i < a.N; i++)
+        //        {
+        //            for (int j = 0; j < a.N; j++)
+        //            {
+        //                resMass[i, j] = a[i, j] * ch;
+        //            }
+        //        }
+        //        return resMass;
+        //    }
+
+        //    // Умножение матрицы А на матрицу Б
+        //    public static Matrix umn(Matrix a, Matrix b)
+        //    {
+        //        Matrix resMass = new Matrix(a.N);
+        //        for (int i = 0; i < a.N; i++)
+        //            for (int j = 0; j < b.N; j++)
+        //                for (int k = 0; k < b.N; k++)
+        //                    resMass[i, j] += a[i, k] * b[k, j];
+
+        //        return resMass;
+        //    }
+
+
+
+        //    // перегрузка оператора умножения
+        //    public static Matrix operator *(Matrix a, Matrix b)
+        //    {
+        //        return Matrix.umn(a, b);
+        //    }
+
+        //    public static Matrix operator *(Matrix a, int b)
+        //    {
+        //        return Matrix.umnch(a, b);
+        //    }
+
+
+        //    // Метод вычитания матрицы Б из матрицы А
+        //    public static Matrix razn(Matrix a, Matrix b)
+        //    {
+        //        Matrix resMass = new Matrix(a.N);
+        //        for (int i = 0; i < a.N; i++)
+        //        {
+        //            for (int j = 0; j < b.N; j++)
+        //            {
+        //                resMass[i, j] = a[i, j] - b[i, j];
+        //            }
+        //        }
+        //        return resMass;
+        //    }
+
+        //    // Перегрузка оператора вычитания
+        //    public static Matrix operator -(Matrix a, Matrix b)
+        //    {
+        //        return Matrix.razn(a, b);
+        //    }
+        //    public static Matrix Sum(Matrix a, Matrix b)
+        //    {
+        //        Matrix resMass = new Matrix(a.N);
+        //        for (int i = 0; i < a.N; i++)
+        //        {
+        //            for (int j = 0; j < b.N; j++)
+        //            {
+        //                resMass[i, j] = a[i, j] + b[i, j];
+        //            }
+        //        }
+        //        return resMass;
+        //    }
+        //    // Перегрузка сложения
+        //    public static Matrix operator +(Matrix a, Matrix b)
+        //    {
+        //        return Matrix.Sum(a, b);
+        //    }
+        //    // Деструктор Matrix
+        //    ~Matrix()
+        //    {
+        //        Console.WriteLine("Очистка");
+        //    }
+
     }
-
-    //class Matrix
-    //{
-    //    // Скрытые поля
-    //    private int n;
-    //    private int[,] mass;
-
-    //    // Создаем конструкторы матрицы
-    //    public Matrix() { }
-    //    public int N
-    //    {
-    //        get { return n; }
-    //        set { if (value > 0) n = value; }
-    //    }
-
-    //    // Задаем аксессоры для работы с полями вне класса Matrix
-    //    public Matrix(int n)
-    //    {
-    //        this.n = n;
-    //        mass = new int[this.n, this.n];
-    //    }
-    //    public int this[int i, int j]
-    //    {
-    //        get
-    //        {
-    //            return mass[i, j];
-    //        }
-    //        set
-    //        {
-    //            mass[i, j] = value;
-    //        }
-    //    }
-
-    //    // Ввод матрицы с клавиатуры
-    //    public void WriteMat()
-    //    {
-    //        for (int i = 0; i < n; i++)
-    //        {
-    //            for (int j = 0; j < n; j++)
-    //            {
-    //                Console.WriteLine("Введите элемент матрицы {0}:{1}", i + 1, j + 1);
-    //                mass[i, j] = Convert.ToInt32(Console.ReadLine());
-    //            }
-    //        }
-    //    }
-
-    //    // Вывод матрицы с клавиатуры
-    //    public void ReadMat()
-    //    {
-    //        for (int i = 0; i < n; i++)
-    //        {
-    //            for (int j = 0; j < n; j++)
-    //            {
-    //                Console.Write(mass[i, j] + "\t");
-    //            }
-    //            Console.WriteLine();
-    //        }
-    //    }
-
-
-    //    // Проверка матрицы А на единичность
-    //    public void oneMat(Matrix a)
-    //    {
-    //        int count = 0;
-    //        for (int i = 0; i < n; i++)
-    //        {
-    //            for (int j = 0; j < n; j++)
-    //            {
-    //                if (a[i, j] == 1 && i == j)
-    //                {
-    //                    count++;
-    //                }
-    //            }
-
-    //        }
-    //        if (count == a.N)
-    //        {
-    //            Console.WriteLine("Единичная");
-    //        }
-    //        else Console.WriteLine("Не единичная");
-    //    }
-
-
-    //    // Умножение матрицы А на число
-    //    public static Matrix umnch(Matrix a, int ch)
-    //    {
-    //        Matrix resMass = new Matrix(a.N);
-    //        for (int i = 0; i < a.N; i++)
-    //        {
-    //            for (int j = 0; j < a.N; j++)
-    //            {
-    //                resMass[i, j] = a[i, j] * ch;
-    //            }
-    //        }
-    //        return resMass;
-    //    }
-
-    //    // Умножение матрицы А на матрицу Б
-    //    public static Matrix umn(Matrix a, Matrix b)
-    //    {
-    //        Matrix resMass = new Matrix(a.N);
-    //        for (int i = 0; i < a.N; i++)
-    //            for (int j = 0; j < b.N; j++)
-    //                for (int k = 0; k < b.N; k++)
-    //                    resMass[i, j] += a[i, k] * b[k, j];
-
-    //        return resMass;
-    //    }
-
-
-
-    //    // перегрузка оператора умножения
-    //    public static Matrix operator *(Matrix a, Matrix b)
-    //    {
-    //        return Matrix.umn(a, b);
-    //    }
-
-    //    public static Matrix operator *(Matrix a, int b)
-    //    {
-    //        return Matrix.umnch(a, b);
-    //    }
-
-
-    //    // Метод вычитания матрицы Б из матрицы А
-    //    public static Matrix razn(Matrix a, Matrix b)
-    //    {
-    //        Matrix resMass = new Matrix(a.N);
-    //        for (int i = 0; i < a.N; i++)
-    //        {
-    //            for (int j = 0; j < b.N; j++)
-    //            {
-    //                resMass[i, j] = a[i, j] - b[i, j];
-    //            }
-    //        }
-    //        return resMass;
-    //    }
-
-    //    // Перегрузка оператора вычитания
-    //    public static Matrix operator -(Matrix a, Matrix b)
-    //    {
-    //        return Matrix.razn(a, b);
-    //    }
-    //    public static Matrix Sum(Matrix a, Matrix b)
-    //    {
-    //        Matrix resMass = new Matrix(a.N);
-    //        for (int i = 0; i < a.N; i++)
-    //        {
-    //            for (int j = 0; j < b.N; j++)
-    //            {
-    //                resMass[i, j] = a[i, j] + b[i, j];
-    //            }
-    //        }
-    //        return resMass;
-    //    }
-    //    // Перегрузка сложения
-    //    public static Matrix operator +(Matrix a, Matrix b)
-    //    {
-    //        return Matrix.Sum(a, b);
-    //    }
-    //    // Деструктор Matrix
-    //    ~Matrix()
-    //    {
-    //        Console.WriteLine("Очистка");
-    //    }
-
-    //}
 }
